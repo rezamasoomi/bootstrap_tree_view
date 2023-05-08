@@ -1,5 +1,6 @@
 # optional_tree_view
-## this is an tree view with this fuature: 
+
+## rtl and ltr bootstrap treeview with many options: 
     - checkable all items 
     - checkable just last chiled level items 
     - disabled default items
