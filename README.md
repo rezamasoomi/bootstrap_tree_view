@@ -170,4 +170,4 @@ $('#tree_view_div_id').treeview({
 
 
 
-#treeView#bootstrap treeview#laravel#html#css
+#treeView#bootstrap treeview#laravel#html#css#rtl treeview#rtl bootstrap treeview
