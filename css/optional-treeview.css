@@ -1,0 +1,25 @@
+/* =========================================================
+ * optional-treeview.css v1.3.0
+ * =========================================================
+ * Copyright 2023 Reza Masoomi
+ * Project URL : https://github.com/rezamasoomi/optional_tree_view
+ * ========================================================= */
+
+.treeview .list-group-item {
+	cursor: pointer;
+}
+
+.treeview span.indent {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.treeview span.icon {
+	width: 12px;
+	margin-right: 5px;
+}
+
+.treeview .node-disabled {
+	color: silver;
+	cursor: not-allowed;
+}

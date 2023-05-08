@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Optional TreeView - Reza Masoomi</title>
+</head>
+<body style="padding: 5%">
+
+<div id="app">
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+
+
+        <div class="page-heading">
+            <div class="page-title" dir="ltr">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last" >
+                        <h3>reza masoomi</h3>
+                        <p class="text-subtitle text-muted">Optional Tree View</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            many style
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <a>All Items Checkable</a>
+                                    <div class="form-group">
+                                        <div id="All_Items_Checkable"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <a>Father Items UnCheckable</a>
+                                    <div class="form-group">
+                                        <div id="Father_Items_UnCheckable"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <a>Default Selected Items</a>
+                                    <div class="form-group">
+                                        <div id="Default_Selected_Items"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <a>Default Disabled Items</a>
+                                    <div class="form-group">
+                                        <div id="Default_Disabled_Items"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <a>Default Selected And Disabled Items</a>
+                                    <div class="form-group">
+                                        <div id="Default_Selected_And_Disabled_Items"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <a>Left checkbox</a>
+                                    <div class="form-group">
+                                        <div id="Left_checkbox"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            <div>
+                <footer>
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>2023 &copy; Reza Masoomi</p>
+                            <p>Instagram: _RezaMasoomi_</p>
+                            <p>Phone: +989368382807</p>
+                        </div>
+                        <div class="float-end">
+                            <p>Crafted  <span class="text-danger"></span> by <a
+                                    href="http://RezaMasoomi.com">Reza Masoomi</a></p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+</body>
+
+<script src="https://kit.fontawesome.com/aec3832ad8.js" crossorigin="anonymous"></script>
+
+
+<script src="js/jquery-3.6.4.js"></script>
+<script src="js/optional-treeview.js"></script>
+
+
+<script>
+
+    //function for create object array for tree view
+    function createTreeArray(data, selected_items, disable_items){
+        let treeData=[];
+        for(let i=0;i<data.length;i++){
+            if(data[i]["master_id"]===null){
+                let item={
+                    id: data[i]["id"],
+                    text: data[i]["step_name"],
+                    state:{
+                        checked:false,
+                        disabled:false
+                    }
+                };
+                //set selected items
+                for(let t=0;t<selected_items.length;t++)
+                {
+                    if(selected_items[t]===item["id"]){
+                        item.state.checked=true;
+                        break;
+                    }
+                }
+                //set disable items
+                for(let t=0;t<disable_items.length;t++)
+                {
+                    if(disable_items[t]===item["id"]){
+                        item.state.disabled=true;
+                        break;
+                    }
+                }
+                if(loop(item)!== false){
+                    item.nodes=loop(item)
+                }
+                treeData.push(item);
+            }
+        }
+        function loop(input){
+            let array_of_items=[];
+            let item={}
+            let exists=false;
+            for(let b=0;b<data.length;b++){
+                if(data[b]["master_id"]===input["id"]){
+                    exists=true;
+                    item={
+                        id: data[b]["id"],
+                        text: data[b]["step_name"],
+                        state:{
+                            checked:false
+                        }
+                    };
+
+                    //set selected items
+                    for(let t=0;t<selected_items.length;t++)
+                    {
+                        if(selected_items[t]===item["id"]){
+                            item.state.checked=true;
+                            break;
+                        }
+                    }
+                    //set disable items
+                    for(let t=0;t<disable_items.length;t++)
+                    {
+                        if(disable_items[t]===item["id"]){
+                            item.state.disabled=true;
+                            break;
+                        }
+                    }
+                    if(loop(item)!== false){
+                        item.nodes=loop(item)
+                    }
+                    array_of_items.push(item);
+                }
+            }
+            if(exists===false)
+                return false;
+            return array_of_items;
+        }
+        return treeData;
+    }
+
+
+    //input data
+    let allSteps=
+            [{"id":1,"step_name":"one","master_id":null},{"id":4,"step_name":"one_chiled","master_id":1},{"id":5,"step_name":"one_chiled_chiled","master_id":4},
+            {"id":2,"step_name":"two","master_id":null},
+            {"id":3,"step_name":"three","master_id":null}];
+
+
+    let treeD=createTreeArray(allSteps,[],[]);
+    $('#All_Items_Checkable').treeview({
+            data: treeD,
+            showIcon: true,
+            showCheckboxForMasters: true,
+            showCheckbox: true,
+            CheckboxLeft: false,
+            multiSelect: true,
+            onNodeChecked: function(event, node) {
+
+            },
+            onNodeUnchecked: function (event, node) {
+            }
+    });
+
+    $('#Father_Items_UnCheckable').treeview({
+            data: treeD,
+            showIcon: false,
+            showCheckboxForMasters: false,
+            showCheckbox: true,
+            CheckboxLeft: false,
+            multiSelect: true,
+            onNodeChecked: function(event, node) {
+
+            },
+            onNodeUnchecked: function (event, node) {
+            }
+    });
+
+
+    let selectedD=createTreeArray(allSteps,[1,5],[]);
+    $('#Default_Selected_Items').treeview({
+            data: selectedD,
+            showIcon: false,
+            showCheckboxForMasters: true,
+            showCheckbox: true,
+        CheckboxLeft: false,
+            multiSelect: true,
+            onNodeChecked: function(event, node) {
+
+            },
+            onNodeUnchecked: function (event, node) {
+            }
+    });
+
+    let disabledD=createTreeArray(allSteps,[],[5,3]);
+    $('#Default_Disabled_Items').treeview({
+            data: disabledD,
+            showIcon: false,
+            showCheckboxForMasters: false,
+            showCheckbox: true,
+        CheckboxLeft: false,
+            multiSelect: true,
+            onNodeChecked: function(event, node) {
+
+            },
+            onNodeUnchecked: function (event, node) {
+            }
+    });
+
+    let selected_disabled_D=createTreeArray(allSteps,[1,5],[3,5]);
+    $('#Default_Selected_And_Disabled_Items').treeview({
+            data: selected_disabled_D,
+            showIcon: false,
+            showCheckboxForMasters: true,
+            showCheckbox: true,
+            CheckboxLeft: false,
+            multiSelect: true,
+            onNodeChecked: function(event, node) {
+
+            },
+            onNodeUnchecked: function (event, node) {
+            }
+    });
+
+
+    $('#Left_checkbox').treeview({
+            data: treeD,
+            showIcon: false,
+            showCheckboxForMasters: true,
+            showCheckbox: true,
+            CheckboxLeft: true,
+            multiSelect: true,
+            onNodeChecked: function(event, node) {
+
+            },
+            onNodeUnchecked: function (event, node) {
+            }
+    });
+
+</script>
+</html>
