@@ -167,3 +167,7 @@ $('#tree_view_div_id').treeview({
 | showCheckbox  | -true -flase| this is for show check box for all items |
 | CheckboxLeft  | -true -flase| this is for show check box befor item text or opposite side of tex |
 | multiSelect  | -true -flase| this is for enable multi choice or single choice |
+
+
+
+#treeView#bootstrap treeview#laravel#html#css
