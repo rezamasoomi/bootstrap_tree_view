@@ -47,6 +47,7 @@
         showCheckboxForMasters: false,
         showCheckbox: false,
         CheckboxLeft: false,
+        ShowChildCount: false,
         showTags: false,
         multiSelect: false,
 
@@ -515,8 +516,10 @@
             // item 内分成两个元素，用flex布局分布在左右两边
             let treeItemLeft = $(_this.template.itemLeftElem)
             let treeItemRight = $(_this.template.itemRightElem)
+            let treeItemRightChildCount = $(_this.template.itemRightChildCountElm)
             treeItem.append(treeItemLeft)
             treeItem.append(treeItemRight)
+            treeItem.append(treeItemRightChildCount)
 
             // Add indent/spacer to mimic tree structure
             // 添加了控制是否启用缩进的开关
@@ -596,6 +599,13 @@
                     );
                 }
             }*/
+            if (node.nodes) {
+                if(_this.options.ShowChildCount){
+                    treeItemRightChildCount.append(
+                        node.nodes.length
+                    );
+                }
+            }
 
 
             if (_this.options.showCheckbox) {
@@ -623,6 +633,7 @@
                         }
 
                     }
+
                 }else if(!node.nodes){
                     let classList = ['check-icon'];
                     if (node.state.checked) {
@@ -757,6 +768,7 @@
         itemWrapper: '<li class="list-group-item d-flex justify-content-between align-items-start"></li>',
         itemLeftElem: '<div class="w-100" ></div>',
         itemRightElem: '<div></div>',
+        itemRightChildCountElm: '<div></div>',
         indent: '<span class="mx-2"></span>',
         icon: '<span class="icon"></span>',
         link: '<a class="w-75" href="#" style="display:inline-block; color:inherit; text-decoration:none;"></a>',
