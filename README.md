@@ -9,6 +9,7 @@
     - multi choice or single choice 
     - rtl and ltr
     - right or left position of checkbox
+    - show child count
   
 ![samples](https://user-images.githubusercontent.com/53290330/236744138-6d37591b-7e4c-4a31-8395-c706d19559a0.png)
 
@@ -168,6 +169,7 @@ $('#tree_view_div_id').treeview({
 | showCheckbox  | -true -flase| this is for show check box for all items |
 | CheckboxLeft  | -true -flase| this is for show check box befor item text or opposite side of tex |
 | multiSelect  | -true -flase| this is for enable multi choice or single choice |
+| ShowChildCount  | -true -flase| this is for show chiled count |
 
 
 
