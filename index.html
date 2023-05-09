@@ -78,6 +78,14 @@
                                     </div>
                                 </div>
                             </div>
+                             <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <a>Show Child Count</a>
+                                    <div class="form-group">
+                                        <div id="Show_Child_Count"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -286,6 +294,21 @@
             showCheckboxForMasters: true,
             showCheckbox: true,
             CheckboxLeft: true,
+            multiSelect: true,
+            onNodeChecked: function(event, node) {
+
+            },
+            onNodeUnchecked: function (event, node) {
+            }
+    });
+    
+    $('#Show_Child_Count').treeview({
+            data: treeD,
+            showIcon: false,
+            showCheckboxForMasters: true,
+            showCheckbox: false,
+            CheckboxLeft: false,
+            ShowChildCount: true,
             multiSelect: true,
             onNodeChecked: function(event, node) {
 
